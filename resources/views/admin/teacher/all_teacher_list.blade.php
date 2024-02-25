@@ -68,12 +68,16 @@
                                         </div>
 
                                         @php
-                                            $user_subjects = $user->teacher->subjects;
+                                            if($user->teacher->subjects == null){
+                                                $user_subjects = 0;
+                                            } else {
+                                                @$user_subjects = $user->teacher->subjects;
+                                            }   
                                         @endphp
 
                                         <div class="contact-icon">
-                                            @if (count($user_subjects) > 0)
-                                                @foreach ($user_subjects as $subject)
+                                            @if (count(@$user_subjects) > 0)
+                                                @foreach (@$user_subjects as $subject)
                                                     {{-- <span class="badge badge-success light">{{$subject->name}}</span> --}}
                                                     {{-- <span class="badge badge-secondary light mx-2">{{$subject->name}}</span>  --}}
                                                     <span class="badge badge-danger light my-1">{{$subject->name}}</span>
