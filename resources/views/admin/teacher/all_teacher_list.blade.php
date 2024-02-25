@@ -46,7 +46,7 @@
                                         <div class="user-content">
                                             <div class="user-info">
                                                 <div class="user-img">
-                                                    <img class="rounded-circle" width="100" src="{{ (!empty($user->photo)) ? url('uploads/teacher/'.$user->photo) : url('uploads/no_image.jpg') }}" alt="">
+                                                    <img class="rounded-circle" width="100" src="{{ (!empty($user->photo)) ? url('uploads/teacher/'.$user->photo) : url('uploads/no_image.jpg') }}" alt="" style="width:100px;height:100px">
                                                 </div>
                                                 <div class="user-details">
                                                     <h4 class="user-name mb-0"> {{ $user->first_name.' '.$user->last_name }} </h4>
@@ -62,17 +62,13 @@
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item" href="{{ route('teacher.class', $user->id) }}">Assign Class</a>
                                                     <a class="dropdown-item" href="{{ route('teacher.subject', $user->id) }}">Assign Subject</a>
-                                                    <a class="dropdown-item" href="{{ route('teacher.delete', $user->id) }}" id="d">Delete</a>
+                                                    <a class="dropdown-item" href="{{ route('teacher.delete', $user->id) }}" id="delete">Delete</a>
                                                 </div>
                                             </div>
                                         </div>
 
                                         @php
-                                            if($user->teacher->subjects == null){
-                                                $user_subjects = 0;
-                                            } else {
-                                                @$user_subjects = $user->teacher->subjects;
-                                            }   
+                                            @$user_subjects = $user->teacher->subjects; 
                                         @endphp
 
                                         <div class="contact-icon">
@@ -81,11 +77,11 @@
                                                     {{-- <span class="badge badge-success light">{{$subject->name}}</span> --}}
                                                     {{-- <span class="badge badge-secondary light mx-2">{{$subject->name}}</span>  --}}
                                                     <span class="badge badge-danger light my-1">{{$subject->name}}</span>
-                                                @endforeach
+                                                 @endforeach
                                                 
                                             @endif
                                             
-                                        </div>
+                                        </div> 
 
                                         <div class="d-flex align-items-center">
                                             <a href="{{route('teacher.profile',$user->id)}}" class="btn  btn-primary btn-sm w-50 me-2"><i class="fa-solid fa-user me-2"></i>Profile</a>
