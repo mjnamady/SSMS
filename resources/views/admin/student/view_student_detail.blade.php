@@ -68,19 +68,43 @@
 
                     <div class="col-xl-3 col-xxl-6 col-sm-6">
                         <ul class="student-details">
-                            <li><span>Roll:</span><h5 class="mb-0">{{ $user->student->id_no }}</h5></li>
+                            <li><span>ID Number:</span><h5 class="mb-0">{{ $user->student->id_no }}</h5></li>
                         </ul>
                     </div>
 
                     <div class="col-xl-3 col-xxl-6 col-sm-6">
                         <ul class="student-details">
-                            <li><span>Religion:</span><h5 class="mb-0">{{ $user->religion }}</h5></li>
+                            <li><span>Roll Number</span><h5 class="mb-0">{{ $user->student->roll_number }}</h5></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xl-3 col-xxl-6 col-sm-6">
+                        <ul class="student-details">
+                            <li><span>Class:</span><h5 class="mb-0">{{ $user->student->class->name }}</h5></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xl-3 col-xxl-6 col-sm-6">
+                        <ul class="student-details">
+                            <li><span>Group:</span><h5 class="mb-0">{{ $user->student->group->name }}</h5></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xl-3 col-xxl-6 col-sm-6">
+                        <ul class="student-details">
+                            <li><span>Admission Date:</span><h5 class="mb-0">{{ $user->created_at->format('d/m/y') }}</h5></li>
                         </ul>
                     </div>
 
                     <div class="col-xl-3 col-xxl-6 col-sm-6">
                         <ul class="student-details">
                             <li><span>Date Of Birth:</span><h5 class="mb-0">{{ $user->student->dob }}</h5></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xl-3 col-xxl-6 col-sm-6">
+                        <ul class="student-details">
+                            <li><span>Religion:</span><h5 class="mb-0">{{ $user->religion }}</h5></li>
                         </ul>
                     </div>
 
@@ -104,16 +128,9 @@
 
                     <div class="col-xl-3 col-xxl-6 col-sm-6">
                         <ul class="student-details">
-                            <li><span>Admission Date:</span><h5 class="mb-0">{{ $user->created_at }}</h5></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-xl-3 col-xxl-6 col-sm-6">
-                        <ul class="student-details">
                             <li><span>Mother Name:</span><h5 class="mb-0">{{ $user->student->mother_name }}</h5></li>
                         </ul>
                     </div>
-
 
                     <div class="col-xl-3 col-xxl-6 col-sm-6">
                         <ul class="student-details">

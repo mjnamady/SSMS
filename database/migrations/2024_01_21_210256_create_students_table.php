@@ -13,20 +13,21 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->integer('roll')->nullable();
-            $table->integer('class_id');
-            $table->integer('year_id');
-            $table->integer('group_id')->nullable();
-            $table->integer('shift_id')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('admission_no')->nullable();
-            $table->string('id_no')->nullable();
-            $table->string('dob')->nullable();
             $table->string('father_name')->nullable();
             $table->string('father_occupation')->nullable();
             $table->string('mother_name')->nullable();
             $table->string('mother_occupation')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('id_no')->nullable();
+            $table->string('roll_number')->nullable();
+            $table->string('dob')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('parent_id')->nullable()->constrained('users');
+            $table->integer('class_id')->nullable();
+            $table->integer('year_id')->nullable();
+            $table->integer('group_id')->nullable();
+            $table->integer('shift_id')->nullable();
             $table->timestamps();
         });
     }

@@ -23,4 +23,10 @@ class Student extends Model
         return $this->hasOne(StudentClass::class, 'id', 'class_id')->withDefault();
     }
 
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(StudentGroup::class);
+    }
+
 }

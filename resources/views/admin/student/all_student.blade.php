@@ -20,9 +20,10 @@
                                     <table id="example3" class="display table" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Reg No</th>
+                                                <<th>ID #</th>
                                                 <th>Image</th>
-                                                <th>Name</th>
+                                                <th>Roll No</th>
+                                                <th>Full Name</th>
                                                 <th>Gender</th>
                                                 <th>Mother Name</th>
                                                 <th>class</th>
@@ -34,16 +35,17 @@
             @foreach ($users as $user)
 
             <tr>
-                <td> {{ $user['student']['id_no'] }} </td>
+                <td><a href="{{ route('view.student', $user->id) }}"><strong>{{ $user['student']['id_no'] }}</strong></a></td>
                 <td><img class="rounded-circle" width="35" src="{{ (!empty($user->photo)) ? url('uploads/students/'.$user->photo) : url('uploads/no_image.jpg') }}" alt=""></td>
+                <td> {{ $user['student']['roll_number'] }} </td>
                 <td>{{$user->first_name.' '.$user->last_name}}</td>
                 <td>{{ $user->gender }}</td>
                 <td>{{ $user['student']['mother_name'] }}</td>
                 <td>{{ $user['student']['class']['name'] }}</td>
-                <td><a href="javascript:void(0);"><strong>{{ $user['student']['phone'] }}</strong></a></td>
+                <td>{{ $user['student']['phone'] }}</td>
                 <td>
                     <div class="d-flex">
-                        <a href="{{ route('view.student', $user->id) }}" class="btn btn-danger shadow btn-xs sharp me-1"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                        {{-- <a href="{{ route('view.student', $user->id) }}" class="btn btn-danger shadow btn-xs sharp me-1"><i class="fa-sharp fa-solid fa-eye"></i></a> --}}
                         <a href="{{ route('edit.student', $user->id) }}" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
                         <a href="{{ route('delete.student', $user->id) }}" id="delete" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                         

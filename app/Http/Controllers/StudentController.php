@@ -6,9 +6,11 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\StudentYear;
+use Illuminate\Support\Str;
 use App\Models\StudentClass;
 use App\Models\StudentGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
@@ -29,35 +31,7 @@ class StudentController extends Controller
 
     public function StoreStudent(Request $request)
     {
-        // dd($request);
-
-        $student = User::where('role','Student')->orderBy('id','DESC')->first();
-
-        if ($student == null) {
-    		$firstReg = 0;
-    		$studentId = $firstReg+1;
-    		if ($studentId < 10) {
-    			$id_no = '000'.$studentId;
-    		}elseif ($studentId < 100) {
-    			$id_no = '00'.$studentId;
-    		}elseif ($studentId < 1000) {
-    			$id_no = '0'.$studentId;
-    		}
-    	}else{
-            
-     $student = User::where('role','Student')->orderBy('id','DESC')->first()->id;
-     	$studentId = $student+1;
-     	if ($studentId < 10) {
-    			$id_no = '000'.$studentId;
-    		}elseif ($studentId < 100) {
-    			$id_no = '00'.$studentId;
-    		}elseif ($studentId < 1000) {
-    			$id_no = '0'.$studentId;
-    		}
-
-    	} // end else 
-
-        $final_id_no = date('y').$id_no;
+        // dd(max('2024/0001','2024/0003','2024/0002'));
 
         $user = new User();
         $user->first_name = $request->first_name;
@@ -66,6 +40,7 @@ class StudentController extends Controller
         $user->address = $request->p_address;
         $user->gender = $request->gender;
         $user->religion = $request->religion;
+        $user->phone = $request->p_phone;
         $user->password = Hash::make('1234');
         $user->created_at = Carbon::now();
 
@@ -80,18 +55,28 @@ class StudentController extends Controller
 
         $user->save();
 
+        // Get the current year
+        $currentYear = Carbon::now()->year;
+        $lastRollNumber = Student::whereYear('created_at', $currentYear)->max('roll_number');
+        $serialNumber = $lastRollNumber ? $lastRollNumber + 1 : 1;
+        $newRollNumber = $currentYear . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
+        $id_no = rand(0000,9999);
+
         $student = new Student();
         $student->user_id = $user->id;
         $student->year_id = $request->year_id;
         $student->class_id = $request->class_id;
+        $student->id_no = $id_no;
+        $student->roll_number = $lastRollNumber ? $serialNumber : $newRollNumber;
         $student->group_id = $request->group_id;
-        $student->id_no = $final_id_no;
         $student->dob = date('Y-m-d',strtotime($request->dob));
         $student->father_name = $request->f_name;
         $student->father_occupation = $request->f_occupation;
         $student->mother_name = $request->m_name;
         $student->mother_occupation = $request->m_occupation;
         $student->phone = $request->p_phone;
+        $student->address = $request->p_address;
+        $user->created_at = Carbon::now();
 
         $student->save();
 
@@ -103,6 +88,7 @@ class StudentController extends Controller
         return redirect()->route('all.students')->with($nofication);
        
     } // End Method
+
 
     public function ViewStudent($id)
     {
@@ -130,7 +116,8 @@ class StudentController extends Controller
         $user->address = $request->p_address;
         $user->gender = $request->gender;
         $user->religion = $request->religion;
-        $user->updated_at = Carbon::now();
+        $user->phone = $request->p_phone;
+        $user->created_at = Carbon::now();
 
         if($request->hasFile('photo'))
         {
@@ -151,6 +138,7 @@ class StudentController extends Controller
             'dob' => date('Y-m-d',strtotime($request->dob)),
             'father_name' => $request->f_name,
             'father_occupation' => $request->f_occupation,
+            'address' => $request->p_address,
             'mother_name' => $request->m_name,
             'mother_occupation' => $request->m_occupation,
             'phone' => $request->p_phone
