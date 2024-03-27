@@ -69,22 +69,6 @@
                                             </div>
                                         </div>
 
-                                        {{-- @php
-                                            @$user_subjects = $user->teacher->subjects; 
-                                        @endphp
-
-                                        <div class="contact-icon">
-                                            @if (count(@$user_subjects) > 0)
-                                                @foreach (@$user_subjects as $subject)
-                                                    <span class="badge badge-success light">{{$subject->name}}</span> --}}
-                                                    {{-- <span class="badge badge-secondary light mx-2">{{$subject->name}}</span>  --}}
-                                                    {{-- {{-- <span class="badge badge-danger light my-1">{{$subject->name}}</span> --}}
-                                                 {{-- @endforeach
-                                                
-                                            @endif
-                                            
-                                        </div>  --}}
-
                                         <div class="d-flex align-items-center">
                                             <a href="{{route('parent.profile',$user->id)}}" class="btn  btn-primary btn-sm w-50 me-2"><i class="fa-solid fa-user me-2"></i>Profile</a>
                                             <a href="https://api.whatsapp.com/send?phone=+2348140699104" target="_blank" class="whatsapp-button" ><i class="fa-solid fa-square-whatsapp me-2"></i>Chat</a>
