@@ -13,6 +13,7 @@ use App\Http\Controllers\backend\StudentClassController;
 use App\Http\Controllers\backend\StudentGroupController;
 use App\Http\Controllers\backend\StudentShiftController;
 use App\Http\Controllers\backend\AssignSubjectController;
+use GuzzleHttp\Psr7\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,10 +140,7 @@ Route::controller(AssignSubjectController::class)->group(function(){
 
     Route::post('/update/assign/subject', 'UpdateAssignSubject')->name('update.assign.subject');
 
-
     Route::get('/delete/class/subject/{class_id}/{subject_id}', 'DeleteClassSubject')->name('delete.class.subject');
-
-    
 
     // Teacher's Subjects 
     Route::get('/teacher/subject/{id}', 'TeacherSubject')->name('teacher.subject');
@@ -167,10 +165,23 @@ Route::controller(TeacherController::class)->group(function(){
     
     Route::post('/update/teacher/{id}', 'UpdateTeacher')->name('update.teacher');
 
-
-   
 });
 
+
+// PARENT ALL GROUP ROUTES
+Route::controller(ParentController::class)->group(function(){
+    Route::get('/all/parents', 'AllParents')->name('all.parents');
+    Route::get('/add/parent', 'AddParent')->name('add.parent');
+    Route::post('/store/parent', 'StoreParent')->name('store.parent');
+    Route::get('/parent/profile/{id}', 'ParentProfile')->name('parent.profile');
+    Route::get('/edit/parent/{id}', 'EditParent')->name('edit.parent');
+    Route::post('/update/parent/{id}', 'UpdateParent')->name('update.parent');
+    Route::get('/delete/parent/{id}', 'DeleteParent')->name('delete.parent');
+
+    Route::post('attach/child/{parent_id}', 'AttachChild')->name('attach.child');
+    Route::get('detach/child/{id}', 'DetachChild')->name('detach.child');
+
+});
 
 
 

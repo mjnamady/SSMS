@@ -20,7 +20,7 @@
                     <li><a href="{{ route('student.year') }}">Student Year</a></li>
                     <li><a href="{{ route('student.group') }}">Student Group</a></li>
                     <li><a href="{{ route('student.shift') }}">Student Shift</a></li>
-                    <li><a href="{{ route('assign.subject') }}">Assign Subject</a></li>
+                    <li><a href="{{ route('assign.subject') }}">Classes & Subjects</a></li>
                     <li><a href="{{ route('exam.type') }}">Exam Type</a></li>
                 </ul>
             </li>
@@ -61,6 +61,18 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('all.teachers') }}">All Teachers</a></li>
                     <li><a href="{{route('add.teacher')}}">Add New Teacher</a></li>
+                    
+                </ul>
+            </li>
+
+            <li>
+                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                    <i class="material-symbols-outlined">person</i>
+                    <span class="nav-text">Manage Parents</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('all.parents') }}">All Parents</a></li>
+                    <li><a href="{{route('add.parent')}}">Add Parent</a></li>
                     
                 </ul>
             </li>

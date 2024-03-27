@@ -1,6 +1,7 @@
 @extends('admin.admin_dashboard')   
 @section('admin')
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="container-fluid">
     <!-- Row -->
@@ -26,8 +27,8 @@
                                 <option value="1">Oldest</option>
                                 <option value="2">Recent</option>
                             </select>
-                            <a href="{{route('add.teacher')}}" class="btn btn-primary">
-                              + New Teacher
+                            <a href="{{route('add.parent')}}" class="btn btn-primary">
+                              Add New Parent
                             </a>
                         </div>
                     </div>
@@ -37,20 +38,23 @@
                 <div class="col-xl-12">
                      <!-- Row -->
                     <div class="row">
-                        @if (!is_null($users))
-                            @foreach ($users as $user)
+                        @if (count($parents) > 0)
+                            @foreach ($parents as $user)
                             <!--column-->
+                            @php
+                                $children = App\Models\Student::where('parent_id', $user->id)->get();
+                            @endphp
                             <div class="col-xl-3 col-lg-4 col-sm-6">
                                 <div class="card contact_list text-center">
                                     <div class="card-body">
                                         <div class="user-content">
                                             <div class="user-info">
                                                 <div class="user-img">
-                                                    <img class="rounded-circle" width="100" src="{{ (!empty($user->photo)) ? url('uploads/teacher/'.$user->photo) : url('uploads/no_image.jpg') }}" alt="" style="width:100px;height:100px">
+                                                    <img class="rounded-circle" width="100" src="{{ (!empty($user->photo)) ? url('uploads/parents/'.$user->photo) : url('uploads/no_image.jpg') }}" alt="" style="width:100px;height:100px">
                                                 </div>
                                                 <div class="user-details">
                                                     <h4 class="user-name mb-0"> {{ $user->first_name.' '.$user->last_name }} </h4>
-                                                    <p>{{ $user->role }}</p>
+                                                    <p> <span class="badge light badge-success">{{ count($children) }} </span> Child </p>
                                                 </div>
                                             </div>
                                             <div class="dropdown">
@@ -60,32 +64,30 @@
                                                     </svg>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="{{ route('teacher.class', $user->id) }}">Assign Class</a>
-                                                    <a class="dropdown-item" href="{{ route('teacher.subject', $user->id) }}">Assign Subject</a>
-                                                    <a class="dropdown-item" href="{{ route('teacher.delete', $user->id) }}" id="delete">Delete</a>
+                                                    <a class="dropdown-item" href="{{ route('delete.parent', $user->id) }}" id="delete">Delete Parent</a>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        @php
+                                        {{-- @php
                                             @$user_subjects = $user->teacher->subjects; 
                                         @endphp
 
                                         <div class="contact-icon">
-                                            @if (!is_null($user_subjects))
+                                            @if (count(@$user_subjects) > 0)
                                                 @foreach (@$user_subjects as $subject)
-                                                    <span class="badge badge-success light">{{$subject->name}}</span>
+                                                    <span class="badge badge-success light">{{$subject->name}}</span> --}}
                                                     {{-- <span class="badge badge-secondary light mx-2">{{$subject->name}}</span>  --}}
                                                     {{-- {{-- <span class="badge badge-danger light my-1">{{$subject->name}}</span> --}}
-                                                 @endforeach
+                                                 {{-- @endforeach
                                                 
                                             @endif
                                             
-                                        </div> 
+                                        </div>  --}}
 
                                         <div class="d-flex align-items-center">
-                                            <a href="{{route('teacher.profile',$user->id)}}" class="btn  btn-primary btn-sm w-50 me-2"><i class="fa-solid fa-user me-2"></i>Profile</a>
-                                            <a href="https://wa.me/08140499104" class="btn  btn-light btn-sm w-50"><i class="fa-sharp fa-regular fa-envelope me-2"></i>Chat</a>
+                                            <a href="{{route('parent.profile',$user->id)}}" class="btn  btn-primary btn-sm w-50 me-2"><i class="fa-solid fa-user me-2"></i>Profile</a>
+                                            <a href="https://api.whatsapp.com/send?phone=+2348140699104" target="_blank" class="whatsapp-button" ><i class="fa-solid fa-square-whatsapp me-2"></i>Chat</a>
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +113,7 @@
                 <!--/Row -->
             </div>
 
-            @if (count($users) > 0)
+            @if (count($parents) > 0)
             <div class="table-pagenation teach">
                 <small>Showing <span>1-5</span>from <span>100</span>data</small>
                 <nav>
