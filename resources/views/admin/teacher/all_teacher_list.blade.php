@@ -85,7 +85,7 @@
 
                                         <div class="d-flex align-items-center">
                                             <a href="{{route('teacher.profile',$user->id)}}" class="btn  btn-primary btn-sm w-50 me-2"><i class="fa-solid fa-user me-2"></i>Profile</a>
-                                            <a href="https://wa.me/08140499104" class="btn  btn-light btn-sm w-50"><i class="fa-sharp fa-regular fa-envelope me-2"></i>Chat</a>
+                                            <a href="https://wa.me/{{$user->phone}}" class="btn  btn-light btn-sm w-50"><i class="fa-sharp fa-regular fa-envelope me-2"></i>Chat</a>
                                         </div>
                                     </div>
                                 </div>
