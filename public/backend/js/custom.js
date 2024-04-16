@@ -34,6 +34,7 @@ var Akademi  = function(){
 
    var handleNavigation = function() {
 	   $(".nav-control").on('click', function() {
+		alert('working!!');
 
 		   $('#main-wrapper').toggleClass("menu-toggle");
 

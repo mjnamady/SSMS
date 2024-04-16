@@ -23,7 +23,7 @@
                                 <h4 class="text-muted mb-0">{{ $adminInfo->email }}</h4>
                                 <p>Email</p>
                             </div>
-                            <div class="dropdown ms-auto">
+                            <div class="ms-auto">
                                 <a href="{{ route('admin.profile.edit') }}" type="button" class="btn light btn-primary">Edit Profile</a>
                             </div>
                         </div>

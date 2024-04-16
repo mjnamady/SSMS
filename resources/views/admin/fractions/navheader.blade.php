@@ -1,5 +1,5 @@
 <div class="nav-header">
-    <a href="index.html" class="brand-logo">
+    <a href="{{ route('admin.dashboard') }}" class="brand-logo">
         <span style="font-size:30px;text-align:center;font-weight:bold;width:48px;height:48px;background-color:#FB7D5B;border-radius:10px">S</span>
         {{-- <svg class="logo-abbr" width="40" height="40" viewBox="0 0 48 54" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect y="3" width="48" height="48" rx="16" fill="#FB7D5B"/>

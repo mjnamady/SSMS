@@ -39,11 +39,10 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
      <!-- Material color picker -->
      <link href="{{asset('backend/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet">
      <link href="{{asset('backend/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
+     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	
 </head>
 <body>
@@ -184,6 +183,7 @@
 	<script src="{{asset('backend/vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js')}}"></script>
 	
 
+    <script src="{{asset('backend/js/custom.js')}}"></script>
     <script src="{{asset('backend/js/custom.min.js')}}"></script>
 	<script src="{{asset('backend/js/dlabnav-init.js')}}"></script>
 	<script src="{{asset('backend/js/demo.js')}}"></script>
@@ -225,7 +225,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
  <script src="{{ asset('js/main.js') }}"></script>
-
 	
 </body>
 
