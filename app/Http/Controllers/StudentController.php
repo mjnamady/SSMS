@@ -60,7 +60,7 @@ class StudentController extends Controller
         $lastRollNumber = Student::whereYear('created_at', $currentYear)->max('roll_number');
         $serialNumber = $lastRollNumber ? $lastRollNumber + 1 : 1;
         $newRollNumber = $currentYear . str_pad($serialNumber, 4, '0', STR_PAD_LEFT);
-        $id_no = rand(0000,9999);
+        $id_no = "STD".rand(0000,9999);
 
         $student = new Student();
         $student->user_id = $user->id;

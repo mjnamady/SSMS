@@ -13,6 +13,7 @@ use App\Http\Controllers\backend\StudentClassController;
 use App\Http\Controllers\backend\StudentGroupController;
 use App\Http\Controllers\backend\StudentShiftController;
 use App\Http\Controllers\backend\AssignSubjectController;
+use App\Http\Controllers\backend\ExamFeeController;
 use GuzzleHttp\Psr7\Request;
 
 /*
@@ -42,7 +43,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Admin 
+// Admin All Routes Start
 Route::middleware(['auth', 'role:Admin'])->group(function (){
 
 Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
@@ -180,12 +181,18 @@ Route::controller(ParentController::class)->group(function(){
 
     Route::post('attach/child/{parent_id}', 'AttachChild')->name('attach.child');
     Route::get('detach/child/{id}', 'DetachChild')->name('detach.child');
+});
 
+
+// Exams Fee All Routes
+Route::controller(ExamFeeController::class)->group(function(){
+    Route::get('/exam/fee/invoice/{id}', 'ExamFeeInvoice')->name('exam.fee.invoice');
+    Route::get('callback', 'CAllBack')->name('callback');
 });
 
 
 
-});
+}); // Admin's All routes ends
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 // Teacher
