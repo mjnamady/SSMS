@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ExamFee;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ExamFeeController extends Controller
 {
@@ -76,5 +77,17 @@ class ExamFeeController extends Controller
         
             return redirect()->back()->with($notification);
         }
+    } // End Method
+
+    public function downloadReceipt($id){
+
+        $examFee = ExamFee::findOrFail($id);
+        $pdf = Pdf::loadView('examFee.exam_fee_receipt', compact('examFee'))
+        ->setPaper('a4')->setOption([
+            'tempDir' => public_path(),
+            'chroot' => public_path()
+        ]);
+        return $pdf->download('receipt.pdf');
+
     } // End Method
 }

@@ -188,6 +188,7 @@ Route::controller(ParentController::class)->group(function(){
 Route::controller(ExamFeeController::class)->group(function(){
     Route::get('/exam/fee/invoice/{id}', 'ExamFeeInvoice')->name('exam.fee.invoice');
     Route::get('callback', 'CAllBack')->name('callback');
+    Route::get('download/receipt/{id}', 'downloadReceipt')->name('download.receipt');
 });
 
 

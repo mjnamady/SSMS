@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExamFee;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Student;
@@ -92,8 +93,10 @@ class StudentController extends Controller
 
     public function ViewStudent($id)
     {
+        
         $user = User::findOrFail($id);
-        return view('admin.student.view_student_detail', compact('user'));
+        $examFee = ExamFee::where('student_id',$user->student->id_no)->get();
+        return view('admin.student.view_student_detail', compact('user','examFee'));
     } // End Method
 
     public function EditStudent($id)
