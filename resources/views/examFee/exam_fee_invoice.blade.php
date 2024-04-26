@@ -150,6 +150,10 @@
                     display_name: 'Term',
                     variable_name: 'term',
                     value: '2023/2024 First Term'
+                },{
+                    display_name: 'Id',
+                    variable_name: 'id',
+                    value: '{{$student->id}}'
                 }
 
             ]

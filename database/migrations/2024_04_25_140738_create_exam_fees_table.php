@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('student_id');
             $table->string('class');
+            $table->string('term');
             $table->string('amount');
             $table->string('payment_status');
             $table->string('payment_method');
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

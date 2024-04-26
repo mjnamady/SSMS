@@ -44,8 +44,8 @@ class ExamFeeController extends Controller
         $response = json_decode($response);
         $response = $response->data;
         $metadata = $response->metadata->custom_fields;
-        dd($response->amount);
-        if($response->data->status == 'success'){
+        // dd($metadata);
+        if($response->status == 'success'){
             
             $examFee = new ExamFee();
             $examFee->transaction_id = $response->reference;
@@ -54,10 +54,27 @@ class ExamFeeController extends Controller
             $examFee->email = $metadata[2]->value;
             $examFee->student_id = $metadata[3]->value;
             $examFee->class = $metadata[4]->value;
+            $examFee->term = $metadata[5]->value;
             $examFee->amount = $response->amount / 100;
+            $examFee->payment_status = "Completed";
+            $examFee->payment_method = "Paystack";
+            $examFee->save();
 
+            $std_id = $metadata[6]->value;
+
+            $notification = array(
+                'message' => 'Exams Fee Paid Successfully',
+                'alert-type' => 'success'
+            );
+        
+            return redirect()->route('view.student',$std_id)->with($notification);
         } else {
-
+            $notification = array(
+                'message' => 'An Error Occured! Please Try Again..',
+                'alert-type' => 'error'
+            );
+        
+            return redirect()->back()->with($notification);
         }
     } // End Method
 }
