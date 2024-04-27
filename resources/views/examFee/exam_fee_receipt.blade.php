@@ -78,7 +78,7 @@
       </tr>
       <tr>
         <th>Student ID:</th>
-        <td> {{$examFee->id_no}} </td>
+        <td> {{$examFee->student_id}} </td>
       </tr>
       <tr>
         <th>Student Class:</th>
@@ -104,6 +104,7 @@
     <div class="footer">
         @if ($examFee->payment_status = 'Completed')
             <p class="text-success">This Transaction is Paid</p>
+            <a href="javascript:window.print();" type="button" class="btn tp-btn btn-primary">Print Receipt</a>
         @else
             <p class="text-danger">This Transaction is Not Paid</p>
             <form id="paymentForm">

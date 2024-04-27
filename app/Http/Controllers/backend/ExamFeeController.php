@@ -82,12 +82,16 @@ class ExamFeeController extends Controller
     public function downloadReceipt($id){
 
         $examFee = ExamFee::findOrFail($id);
-        $pdf = Pdf::loadView('examFee.exam_fee_receipt', compact('examFee'))
-        ->setPaper('a4')->setOption([
-            'tempDir' => public_path(),
-            'chroot' => public_path()
-        ]);
-        return $pdf->download('receipt.pdf');
+
+        // $pdf = Pdf::loadView('examFee.exam_fee_receipt', compact('examFee'))
+        // ->setPaper('a4')->setOption([
+        //     'defaultFont' => 'sans-serif',
+        //     'tempDir' => public_path(),
+        //     'chroot' => public_path()
+        // ]);
+        // return $pdf->download('receipt.pdf');
+
+        return view('examFee.exam_fee_receipt',compact('examFee'));
 
     } // End Method
 }
