@@ -77,6 +77,17 @@
                     
                 </ul>
             </li>
+
+            <li>
+                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                    <i class="material-symbols-outlined">school</i>
+                    <span class="nav-text">Result</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('add.result') }}">Add Result</a></li>
+                    
+                </ul>
+            </li>
             
         </ul>
 

@@ -14,6 +14,7 @@ use App\Http\Controllers\backend\StudentGroupController;
 use App\Http\Controllers\backend\StudentShiftController;
 use App\Http\Controllers\backend\AssignSubjectController;
 use App\Http\Controllers\backend\ExamFeeController;
+use App\Http\Controllers\ResultController;
 use GuzzleHttp\Psr7\Request;
 
 /*
@@ -189,6 +190,12 @@ Route::controller(ExamFeeController::class)->group(function(){
     Route::get('/exam/fee/invoice/{id}', 'ExamFeeInvoice')->name('exam.fee.invoice');
     Route::get('callback', 'CAllBack')->name('callback');
     Route::get('download/receipt/{id}', 'downloadReceipt')->name('download.receipt');
+});
+
+// Result All Routes
+Route::controller(ResultController::class)->group(function(){
+    Route::get('/add/result', 'AddResult')->name('add.result');
+    Route::get('/fetch/student', 'FetchStudent')->name('fetch.student');
 });
 
 
