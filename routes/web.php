@@ -196,6 +196,7 @@ Route::controller(ExamFeeController::class)->group(function(){
 Route::controller(ResultController::class)->group(function(){
     Route::get('/add/result', 'AddResult')->name('add.result');
     Route::get('/fetch/student', 'FetchStudent')->name('fetch.student');
+    Route::get('/check/declared/result', 'CheckDelaredResult')->name('check.declared.result');
 });
 
 

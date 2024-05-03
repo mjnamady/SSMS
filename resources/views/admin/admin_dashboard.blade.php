@@ -13,6 +13,7 @@
 	<meta property="og:description" content="Akademi - the ultimate admin dashboard and Bootstrap 5 template. Specially designed for professionals, and for business. Akademi provides advanced features and an easy-to-use interface for creating a top-quality website with School and Education Dashboard">
 	<meta property="og:image" content="social-image.html" >
 	<meta name="format-detection" content="telephone=no">
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
 	<!-- Mobile Specific -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -197,7 +198,7 @@
 
     <script src="{{asset('backend/vendor/global/global.min.js')}}"></script>
 	<script src="{{asset('backend/vendor/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
-	<script src="{{asset('backend/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
+	{{-- <script src="{{asset('backend/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script> --}}
     
 <script>
  @if(Session::has('message'))

@@ -3,7 +3,7 @@
 
 <div class="container-fluid">
 
-    <form action="{{ route('store.assign.subject') }}" method="POST"> 
+    <form action="" method="GET"> 
         @csrf
         <div class="row">
             <div class="add_item">
@@ -19,23 +19,33 @@
 
                                     <div class="row">
 
-                                        <div class="row mb-3">
-                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Open this select menu</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                  </select>
-                                            </div>
-                                          </div>
-                                    
-                                        <div class="col-xl-12 col-sm-12">
+
+                                        <label class="col-sm-2 col-form-label" style="text-align: right;font-weight:bold"> Term</label>
+                                        <div class="col-xl-10 col-sm-12">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlInput4" class="form-label">Select a Class <span class="required">*</span></label>
-                                                <select name="class_id" id="class_id" class="default-select form-control wide dynamic" data-dependent="student">
-                                                    <option selected="">Select Class </option>
+                                                <select name="term_id" id="term_id" class="form-control">
+                                                    <option selected="">-- Select Term --</option>
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <label class="col-sm-2 col-form-label" style="text-align: right;font-weight:bold"> Year</label>
+                                        <div class="col-xl-10 col-sm-12">
+                                            <div class="mb-3">
+                                                <select name="year_id" id="year_id" class="form-control">
+                                                    <option selected="">-- Select Year --</option>
+                                                   
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <label class="col-sm-2 col-form-label" style="text-align: right;font-weight:bold">Select Class</label>
+                                        <div class="col-xl-10 col-sm-12">
+                                            <div class="mb-3">
+                                                <select name="class_id" id="class_id" class="form-control dynamic" data-dependent="student">
+                                                    <option selected="">-- Select Class --</option>
                                                     @foreach ($classes as $class)
                                                     <option value="{{$class->id}}">{{ $class->name }}</option>
                                                     @endforeach
@@ -43,18 +53,38 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-10 mb-2">
-                                            <label class="text-label form-label">Select Student<span class="required">*</span></label>
-                                            <div class="dropdown bootstrap-select default-select form-control wide">
-                                                <select name="student_id" id="student" class="default-select form-control wide" aria-label="Default select example">
-                                                        <option selected="">-- --</option>
+                                        <label class="col-sm-2 col-form-label" style="text-align: right;font-weight:bold">Select Student</label>
+                                        <div class="col-xl-10 col-sm-12">
+                                            <div class="mb-3">
+                                                <select name="student_id" id="student" class="form-control">
+                                                    <option selected="">-- --</option>
                                                 </select>
                                             </div>
                                         </div>
 
-                                       
+                                        <label class="col-sm-2 col-form-label"></label>
+                                        <div class="col-xl-10 col-sm-12">
+                                            <div class="mb-3">
+
+                                                {{-- <div class="alert alert-success alert-dismissible fade show">
+                                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>	
+                                                    <strong>Success!</strong> Message has been sent.
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+                                                    
+                                                    </button>
+                                                </div> --}}
+        
+                                            </div>
+                                        </div>
+
+
+                                        <label class="col-sm-2 col-form-label box" style="text-align: right;font-weight:bold">Subjects</label>
+                                        <div class="col-xl-10 col-sm-12 box" id="showSubjects">
+                                                
+                                        </div>
+
                                         <div class="mt-4">
-                                            <button class="btn btn-primary" type="submit">Declare Result</button>
+                                            <button class="btn btn-primary" type="submit" id="btn">Declare Result</button>
                                         </div>
                                     </div>
                                 </div>
@@ -64,16 +94,13 @@
                 </div>
             </div>
         </div>
-    </form>
-
-   
+    </form> 
 </div>
-
-
 
 <script>
 
     $(document).ready(function (){
+        $('.box').hide();
         $('.dynamic').on('change', function(){
             let class_id = $(this).val();
             let dependent = $(this).data('dependent');
@@ -84,10 +111,25 @@
                 data: {class_id:class_id, _token:_token},
                 dataType: "json",
                 success: function (response){
-                    // $('#'+dependent).html('<option selected="">--Select Student--</option>')
+                    $('#'+dependent).html(response.std_data);
+                    $('.box').show();
+                    $('#showSubjects').html(response.subject_data);
+                    // console.log(response.std_data);
                 }
             });
-            
+        });
+        $('#student').on('change', function (e){
+            e.preventDefault();
+            let student_id = $(this).val();
+            $.ajax({
+                url: "{{route('check.declared.result')}}",
+                method: "GET",
+                dataType: "json",
+                data: {student_id:student_id, _token:'{{csrf_token()}}'},
+                success: function (result) {
+                    console.log(result);
+                }
+            });
         });
     });
 
