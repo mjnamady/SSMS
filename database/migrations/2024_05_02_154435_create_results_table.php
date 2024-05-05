@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('class_id');
             $table->integer('subject_id');
             $table->integer('marks');
-            $table->string('term');
-            $table->string('year');
+            $table->integer('term_id');
+            $table->integer('year_id');
             $table->timestamps();
         });
     }

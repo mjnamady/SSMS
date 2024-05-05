@@ -44,7 +44,6 @@
      <link href="{{asset('backend/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet">
      <link href="{{asset('backend/vendor/bootstrap-datepicker-master/css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
      <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	
 </head>
 <body>
 
@@ -222,8 +221,7 @@
  }
  @endif 
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
 
  <script src="{{ asset('js/main.js') }}"></script>
 	

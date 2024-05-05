@@ -85,7 +85,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('add.result') }}">Add Result</a></li>
-                    
+                    <li><a href="{{ route('manage.result') }}">Manage Result</a></li>
                 </ul>
             </li>
             

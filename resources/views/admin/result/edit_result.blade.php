@@ -3,7 +3,7 @@
 
 <div class="container-fluid">
 
-    <form action="{{route('store.result')}}" method="POST"> 
+    <form action="{{route('update.result')}}" method="POST"> 
         @csrf
         <div class="row">
             <div class="add_item">
@@ -11,7 +11,7 @@
                     
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0">Declare Result</h5>
+                            <h5 class="mb-0">Edit [ <span class="text-success">{{$result[0]->student->user->first_name}} {{$result[0]->student->user->last_name}}'s</span> ] Result</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -26,7 +26,7 @@
                                                 <select name="term_id" id="term_id" class="form-control">
                                                     <option selected="">-- Select Term --</option>
                                                     @foreach ($terms as $term)
-                                                        <option value="{{$term->id}}">{{$term->name}}</option>
+                                                        <option {{ ($result[0]->term_id == $term->id)? 'selected': '' }} value="{{$term->id}}">{{$term->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -38,7 +38,7 @@
                                                 <select name="year_id" id="year_id" class="form-control">
                                                     <option selected="">-- Select Year --</option>
                                                     @foreach ($years as $year)
-                                                    <option value="{{$year->id}}">{{$year->name}}</option>
+                                                    <option {{ ($result[0]->year_id == $year->id)? 'selected': '' }} value="{{$year->id}}">{{$year->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -48,10 +48,10 @@
                                         <label class="col-sm-2 col-form-label" style="text-align: right;font-weight:bold">Select Class</label>
                                         <div class="col-xl-10 col-sm-12">
                                             <div class="mb-3">
-                                                <select name="class_id" id="class_id" class="form-control dynamic" data-dependent="student">
+                                                <select disabled name="class_id" id="class_id" class="form-control dynamic" data-dependent="student">
                                                     <option selected="">-- Select Class --</option>
                                                     @foreach ($classes as $class)
-                                                    <option value="{{$class->id}}">{{ $class->name }}</option>
+                                                    <option {{ ($result[0]->class_id == $class->id)? 'selected': '' }} value="{{$class->id}}">{{ $class->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -60,8 +60,8 @@
                                         <label class="col-sm-2 col-form-label" style="text-align: right;font-weight:bold">Select Student</label>
                                         <div class="col-xl-10 col-sm-12">
                                             <div class="mb-3">
-                                                <select name="student_id" id="student" class="form-control">
-                                                    <option selected="">-- --</option>
+                                                <select disabled name="student_id" id="student" class="form-control">
+                                                    <option value="{{ $result[0]->student_id }}" selected="">{{$result[0]->student->user->first_name}} {{$result[0]->student->user->last_name}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -71,11 +71,20 @@
                                             <div class="mb-3" id="message">
                                             </div>
                                         </div>
-
+                                        
 
                                         <label class="col-sm-2 col-form-label box" style="text-align: right;font-weight:bold">Subjects</label>
                                         <div class="col-xl-10 col-sm-12 box" id="showSubjects">
-                                                
+                                        @php
+                                            $count = count($result);
+                                        @endphp
+                                            @for ($i = 0; $i < $count; $i++)
+                                                <label class="form-label"> {{ $result[$i]->subject->name }} </label>
+                                                <input type="hidden" name="ids[]" value="{{$result[$i]->id}}">
+                                                <input type="hidden" name="subject_ids[]" value="{{$result[$i]->subject_id}}">
+                                                <input type="number" name="marks[]" class="form-control" placeholder="Enter marks out of 100" value="{{$result[$i]->marks}}">
+                                            @endfor
+                                           
                                         </div>
 
                                         <div class="mt-4">
@@ -92,7 +101,7 @@
     </form> 
 </div>
 
-<script>
+{{-- <script>
 
     $(document).ready(function (){
         $('.box').hide();
@@ -131,7 +140,7 @@
         });
     });
 
-</script>
+</script> --}}
 
 
 

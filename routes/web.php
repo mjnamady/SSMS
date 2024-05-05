@@ -197,6 +197,11 @@ Route::controller(ResultController::class)->group(function(){
     Route::get('/add/result', 'AddResult')->name('add.result');
     Route::get('/fetch/student', 'FetchStudent')->name('fetch.student');
     Route::get('/check/declared/result', 'CheckDelaredResult')->name('check.declared.result');
+    Route::post('/store/result', 'StoreResult')->name('store.result');
+    Route::get('/manage/result', 'ManageResult')->name('manage.result');
+    Route::get('/edit/result/{id}', 'EditResult')->name('edit.result');
+    Route::post('/update/result', 'UpdateResult')->name('update.result');
+    Route::get('/view/result/{id}', 'ViewResult')->name('view.result');
 });
 
 
