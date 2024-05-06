@@ -33,7 +33,6 @@ class ResultController extends Controller
                  $subject_data[$i] = '<label class="form-label">'.$std_subjects[$i]->name.'</label>
                 <input type="hidden" name="subject_ids[]" value="'.$std_subjects[$i]->id.'">
                 <input type="number" name="marks[]" class="form-control" placeholder="Enter marks out of 100">';
-        
             }
            
         // ['std_data'=>$std_data, 'subject_data'=>$subject_data]

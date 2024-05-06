@@ -18,7 +18,7 @@ class Result extends Model
 
     public function term(): BelongsTo
     {
-        return $this->belongsTo(ExamType::class);
+        return $this->belongsTo(ExamType::class, 'term_id');
     }
 
     public function year(): BelongsTo

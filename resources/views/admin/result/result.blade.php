@@ -658,10 +658,10 @@ th {
                 <td>{{ $result[0]->student->user->gender }}</td>
             </tr>
             <tr>
-                <th>Position:</th>
-                <td><input type="text"></td>
+                {{-- <th>Position:</th>
+                <td><input type="text"></td> --}}
                 <th>Term:</th>
-                <td><input type="text"></td>
+                <td>{{ $result[0]->term->name }}</td>
             </tr>
             <tr>
                 <th>Next Term Begins:</th>
@@ -672,15 +672,19 @@ th {
                         $total_score = App\Models\Result::where('student_id', $result[0]->student_id)->sum('marks');
                         $count = count($result);
                         $total_possible_score = ($count*100);
+
+                        echo ($total_score/$total_possible_score)*100 ."%";
                         
                     @endphp
                 </td>
             </tr>
             <tr>
                 <th>Date:</th>
-                <td><input type="text"></td>
-                <th>Overall Position:</th>
-                <td><input type="text"></td>
+                <td>
+                    {{Carbon\Carbon::now()->format('d/m/y')}}
+                </td>
+                {{-- <th>Overall Position:</th>
+                <td><input type="text"></td> --}}
             </tr>
         </table>
         
@@ -731,9 +735,9 @@ th {
         
         <div class="remarks">
             <label for="class-teacher-remarks">CLASS TEACHER'S REMARKS:</label>
-            <input type="text" id="class-teacher-remarks">
+            <input type="text" id="class-teacher-remarks" value="Good Performance, Keep it up.">
             <label for="principal-comments">PRINCIPAL'S COMMENTS:</label>
-            <input type="text" id="principal-comments">
+            <input type="text" id="principal-comments" value="Very Good, Keep it up!">
         </div>
         
         <div class="card-container">
